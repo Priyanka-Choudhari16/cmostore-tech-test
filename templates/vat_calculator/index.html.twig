@@ -1,0 +1,72 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}VAT Calculator
+{% endblock %}
+
+{% block body %}
+	<div class="mg-l-10">
+		<h1>VAT Calculator</h1>
+
+		<h2>Calculate VAT</h2>
+		<form method="POST" class="form" id="vat-calculator-form" action="{{ path('app_vat_calculator_calculate') }}">
+			<div>
+				<label for="value">Value:</label>
+				<input type="number" id="value" name="value" placeholder="Enter original price" class="form-input" required>
+			</div>
+			<div>
+				<label for="vat_rate">VAT Rate (%):</label>
+				<input type="number" id="vat_rate" name="vat_rate" placeholder="Enter vat rate" class="form-input mg-t-10" required>
+			</div>
+			<input type="submit" class="btn btn-black mg-t-10" value="Calculate">
+		</form>
+
+		<h2 class="mg-t-20">Calculation History</h2>
+		<table>
+			{% if calculations is not empty %}
+				<thead>
+					<tr>
+						<th>Original Value</th>
+						<th>VAT Rate</th>
+						<th>Exclusive Vat Amount (tax to add on)</th>
+						<th>Exclusive Vat TotalAmount</th>
+						<th>Inclusive Vat Amount (tax taken away)</th>
+						<th>Inclusive Vat TotalAmount</th>
+					</tr>
+				</thead>
+				<tbody>
+					{% for calculation in calculations %}
+						<tr>
+							<td>{{ calculation.getOriginalValue() }}</td>
+							<td>{{ calculation.getVatRate() }}</td>
+							<td>{{ calculation.getExVatValue()|number_format(2) }}</td>
+							<td>{{ calculation.getExVatTotalAmount()|number_format(2) }}</td>
+							<td>{{ calculation.getIncVatvalue()|number_format(2) }}</td>
+							<td>{{ calculation.getIncVatTotalAmount()|number_format(2) }}</td>
+						</tr>
+					{% endfor %}
+				{% else %}
+					<div></div>
+				{% endif %}
+			</tbody>
+		</table>
+
+		<div class="row mg-t-10" style="width:32%">
+			<div class="col">
+				<form method="GET" action="{{ path('app_vat_calculator_clear_history') }}">
+					<button type="submit" class="btn btn-black">Clear History</button>
+				</form>
+			</div>
+
+			<div class="col">
+				{% if export_csv is defined and export_csv != null and export_csv != "no data" %}
+					<p class="success">calculation history downloaded</p>
+					{% elseif export_csv is defined and export_csv == "no data" %}
+					<p class="success">No calculation history to download</p>
+				{% endif %}
+				<form method="GET" action="{{ path('app_vat_calculator_export_csv') }}">
+					<button type="submit" class="btn btn-black">Export History as CSV</button>
+				</form>
+			</div>
+		</div>
+	</div>
+{% endblock %}

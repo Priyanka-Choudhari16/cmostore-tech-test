@@ -1,0 +1,18 @@
+app_vat_calculator:
+    path: /
+    controller: App\Controller\VatCalculatorController::index
+
+app_vat_calculator_clear_history:
+    path: /clear-history
+    controller: App\Controller\VatCalculatorController::clearHistory
+    methods: GET
+
+app_vat_calculator_calculate:
+    path: /calculate
+    controller: App\Controller\VatCalculatorController::calculate
+    methods: POST
+
+app_vat_calculator_export_csv:
+    path: /export-csv
+    controller: App\Controller\VatCalculatorController::exportCsv
+    methods: GET

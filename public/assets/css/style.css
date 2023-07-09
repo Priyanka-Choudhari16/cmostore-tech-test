@@ -1,0 +1,58 @@
+.btn {
+    padding: 10px 20px;
+    display: inline-block;
+    margin: 0 auto;
+    font-weight: bold;
+    border-radius: 3px;
+    cursor: pointer;
+    border: 1px solid #949494;
+}
+
+.btn-black {
+    background-color: #222a32;
+    color: #b3b3b3;
+}
+
+table,
+td,
+th {
+    border: 1px solid;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.mg-t-10 {
+    margin-top: 10px;
+}
+
+.mg-t-20 {
+    margin-top: 20px;
+}
+
+.mg-l-10 {
+    margin-left: 10px;
+}
+
+.form {
+    border: 1px solid #4271af;
+    padding: 20px;
+    width: 500px;
+    border-radius: 5px;
+}
+
+.form-input {
+    padding: 5px;
+    border-radius: 5px;
+    border: 1px solid darkslategray;
+}
+
+.error {
+    border: 1px solid red;
+}
+
+.success {
+    color: green;
+}
